@@ -1,12 +1,22 @@
-all: libhelpers.so
+LIBS = libbufio.so libhelpers.so
 
-libhelpers.so: helpers.o read_until.o
-	gcc -shared -o libhelpers.so helpers.o read_until.o
+all: $(LIBS)
 
-read_until.o: read_until.c
-	gcc -c -std=c99 read_until.c
+libhelpers.so: helpers.o
+	gcc -shared helpers.o -o libhelpers.so
 
-helpers.o: helpers.c
+helpers.o: helpers.c helpers.h
 	gcc -c -std=c99 helpers.c
+	
 clean:
-	rm -rf *.o libhelpers.so
+	rm -rf *.o *.so
+
+#libbufio
+
+libbufio.so: bufio.o
+	gcc -shared bufio.o -o libbufio.so
+
+bufio.o: bufio.c bufio.h
+	gcc -c -std=c99 bufio.c
+
+

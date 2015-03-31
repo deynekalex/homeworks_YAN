@@ -1,6 +1,9 @@
 #include "helpers.h"
 #include <stdio.h>
 
+//В первом задании необходимо реализовать примитивный вариант утилиты cat, 
+//копирующий символы из stdin на stdout.
+
 const size_t BUFF_SIZE  = 1024;
 
 int main(){
