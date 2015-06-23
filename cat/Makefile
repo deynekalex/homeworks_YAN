@@ -1,4 +1,4 @@
-lib = -L../lib -Wl,-rpath=../lib -Wall -fPIC -I../lib
+lib = -std=c99 -L../lib -Wl,-rpath=../lib -Wall -fPIC -I../lib
 #commments
 
 #-Wall - show all warnings
@@ -8,7 +8,10 @@ lib = -L../lib -Wl,-rpath=../lib -Wall -fPIC -I../lib
 all: cat
 
 cat: cat.c 
-	gcc $(lib) -o cat cat.c -lhelpers
+	gcc $(lib) -o cat cat.c -lhelpers\
 
+doublewords: doublewords.c
+	gcc $(lib) -o doublewords doublewords.c -lhelpers\
+	
 clean:
-	rm cat
+	rm cat && rm doublewords

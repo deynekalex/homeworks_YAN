@@ -94,3 +94,21 @@ int spawn(const char * file, char * const argv []){
 		break;
 	}
 }
+/*
+//struct execargs_t {...} – информация о том, какую программу с какими аргументами нужно запустить.
+execargs_t* execargs_new(char* command, char** argv)
+{
+    execargs_t* result = (execargs_t*) malloc(sizeof(execargs_t));
+    result->command = command;
+    result->argv = argv;
+    return result;
+}
+
+//запустить указанную в args программу. Вернуть отрицательное число, если что-то пошло не так. Запуск производить аналогично запуску spawn из третьего задания: с учётом переменной окружения PATH.
+int exec(execargs_t* args)
+{   
+    execvp(args->command, args->argv);
+    return -1;
+}
+*/
+
