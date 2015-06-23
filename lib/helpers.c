@@ -37,28 +37,31 @@ ssize_t write_(int fd, const void *buf, size_t count){
 //она прекращает считывание из fd не только при заполнении буфера,
 //но и при наличии символа delimiter в уже заполенной части буфера.
 
-ssize_t read_until(int fd, void *buf, size_t count, char delimeter){
-    ssize_t real_counter;
-    ssize_t sum = 0;
-    bool is_delimeted = false;
-    while((real_counter = read(fd, buf, count)) > 0 && !is_delimeted){
-        if (real_counter == -1){
-            return -1;
-        }
-        is_delimeted = false;
-        for (int i = 0; i < real_counter; i++){
-            if (*(char*)(buf+i) == delimeter){
-                is_delimeted = true;
-                break;
+//в итоге ф-я записывает в fd блоки, последний блок содержит delimeter или является последним из источника.
+
+ssize_t read_until(int fd, void *buf, size_t count, char delimiter)
+{
+    ssize_t actually_read;
+    ssize_t overall = 0;
+    while((actually_read = read(fd, buf, count)) > 0)
+    {
+        bool finded = false;
+        for(int i = 0; i < actually_read; ++i){
+            if(*((char*)buf + i) == delimiter){
+                finded=true;
             }
         }
-        sum += real_counter;
-        count -= real_counter;
-        buf += real_counter;
+        overall+=actually_read;
+        count-=actually_read;
+        buf+=actually_read;
+        if(finded) break;
     }
-    if (real_counter == -1)
+    if(actually_read==-1)
+    {
         return -1;
-    return sum;
+    } else {
+        return overall;
+    }
 }
 
 //Функция должна запускать исполняемый файл file, выбираемый в соответствии с переменной окружения PATH, 

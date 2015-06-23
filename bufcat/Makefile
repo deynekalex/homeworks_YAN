@@ -1,4 +1,4 @@
-C_FLAGS= -L../lib -Wl,-rpath=../lib -Wall -fPIC -I../lib
+C_FLAGS= -L../lib -Wl,-rpath=../lib -Wall -fPIC -I../lib -Wimplicit-function-declaration
 DEBUG_FLAGS= 
 FILES= bufcat.c
 
