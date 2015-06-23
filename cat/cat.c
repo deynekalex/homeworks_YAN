@@ -10,10 +10,14 @@ int main(){
 	char buffer[BUFF_SIZE];
 	ssize_t res;
 	while((res = read_(STDIN_FILENO, buffer, BUFF_SIZE)) > 0){
-		if (res == -1)
+		if (res == -1){
 			perror("failed on reading");
-		if (write_(STDOUT_FILENO, buffer, res) < 0)
+			return EXIT_FAILURE;
+		}
+		if (write_(STDOUT_FILENO, buffer, res) < 0){
 			perror("failed on writing");
+			return EXIT_FAILURE;
+		}
 	}
 	return 0;
 }

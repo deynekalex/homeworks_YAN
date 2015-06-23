@@ -6,7 +6,7 @@ libhelpers.so: helpers.o
 	gcc -shared helpers.o -o libhelpers.so
 
 helpers.o: helpers.c helpers.h
-	gcc -fPIC -c -std=c99 helpers.c
+	gcc -c -std=c99 helpers.c
 	
 clean:
 	rm -rf *.o *.so
@@ -14,7 +14,7 @@ clean:
 #libbufio
 
 libbufio.so: bufio.o
-	gcc -fPIC -shared bufio.o -o libbufio.so
+	gcc -shared bufio.o -o libbufio.so
 
 bufio.o: bufio.c bufio.h
 	gcc -c -std=c99 bufio.c
