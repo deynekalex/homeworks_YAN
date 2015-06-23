@@ -1,13 +1,13 @@
 #include "helpers.h"
 #include <stdio.h>
 #include <string.h>
-#define BUFF_SIZE 8192
+#define BUFF_SIZE 4096
 
 //Требуется реализовать утилиту revwords, читающую слова из stdin 
 //и выводящую в stdout эти же слова развёрнутыми.
 //Гарантируется, что каждое слово имеет длину не более 4096 байт.
 
-const int BUFFER_SIZE = 8192;
+const int BUFFER_SIZE = 4096;
 const char DELIM = ' ';
 char buffer[BUFF_SIZE];
 

@@ -38,8 +38,10 @@ ssize_t buf_fill(fd_t fd, struct buf_t *buf, size_t required) {
         ssize_t cnt;
         if ((cnt = read(fd, buf->buf + buf->size, buf->capacity - buf->size)) == 0)
             break;
-        if (cnt == -1) 
+        if (cnt == -1){
+            perror("fail on reading");
             return -1;
+        }
         buf->size += cnt;
     }
     return buf->size;
@@ -51,8 +53,10 @@ ssize_t buf_flush(fd_t fd, struct buf_t *buf, size_t required) {
     ssize_t res = buf->size;
     while (required >= 1) {
         ssize_t cnt;
-        if ((cnt = write(fd, buf->buf, buf->size)) == -1)
+        if ((cnt = write(fd, buf->buf, buf->size)) == -1){
+            perror("fail on writing")
             return -1;
+        }
         memmove(buf->buf, buf->buf + cnt, buf->size - cnt);
         required -= cnt;
         buf->size -= cnt;
