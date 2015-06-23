@@ -16,7 +16,9 @@ int main() {
             }
             return 0;
         }
-        if (buf_flush(STDOUT_FILENO, buf, buf_size(buf)) < 0)
+        if (buf_flush(STDOUT_FILENO, buf, buf_size(buf)) < 0){
             perror("failed on writing"); 
+            return -1;
+        }
     } while(1);
 }

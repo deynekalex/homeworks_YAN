@@ -35,8 +35,10 @@ int main()
         for (int i = 0; i < result; i++){
             if(buffer[i] == DELIM){
                 reverse(buffer, i - prev_delim);//reverse until delimeter
-                if(write_(STDOUT_FILENO, buffer + prev_delim, i - prev_delim + 1) == -1)//write reverse buffer + delimeter
+                if(write_(STDOUT_FILENO, buffer + prev_delim, i - prev_delim + 1) == -1)//write reverse buffer + delimeter{
                     perror("failed on writing");
+                    return -1;
+                }
                 prev_delim = i + 1;
             }
         }
@@ -44,7 +46,9 @@ int main()
         prev = result - prev_delim;
     }
     reverse(buffer, prev);
-    if(write_(STDOUT_FILENO, buffer, prev)==-1)
+    if(write_(STDOUT_FILENO, buffer, prev)==-1){
         perror("failed on writing");
+        return -1;
+    }
     return 0;
 }
